@@ -17,7 +17,7 @@ require "action_cable/engine"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module Starterkit
+module Mypwa
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
@@ -33,7 +33,7 @@ module Starterkit
     config.api_only = true
 
     config.middleware.use ActionDispatch::Cookies
-    config.middleware.use ActionDispatch::Session::CookieStore, key: '_starterkit_cookie', expire_after: 30.days, domain: :all
+    config.middleware.use ActionDispatch::Session::CookieStore, key: '_mypwa_cookie', expire_after: 30.days, domain: :all
     config.action_dispatch.cookies_serializer = :json
 
 

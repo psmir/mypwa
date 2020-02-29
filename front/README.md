@@ -1,4 +1,4 @@
-# Chatty
+# MyPWA frontend
 
 ## Project setup
 ```

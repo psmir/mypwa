@@ -1,8 +1,8 @@
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.11.2"
 
-set :application, "chatty"
-set :repo_url, "git@github.com:psmir/chatty.git"
+set :application, "mypwa"
+set :repo_url, "git@github.com:psmir/mypwa.git"
 set :git_strategy,  Capistrano::GitSubfolderStrategy
 set :git_subfolder, '/back'
 
