@@ -3,6 +3,8 @@ lock "~> 3.11.2"
 
 set :application, "chatty"
 set :repo_url, "git@github.com:psmir/chatty.git"
+set :git_strategy,  Capistrano::GitSubfolderStrategy
+set :git_subfolder, '/back'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
