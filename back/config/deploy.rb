@@ -3,8 +3,7 @@ lock "~> 3.11.2"
 
 set :application, "mypwa"
 set :repo_url, "git@github.com:psmir/mypwa.git"
-set :git_strategy,  Capistrano::GitSubfolderStrategy
-set :git_subfolder, '/back'
+set :repo_tree, 'back'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
