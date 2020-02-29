@@ -1,0 +1,30 @@
+default: &default
+  adapter: postgresql
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+  port: <%= ENV["RAILS_DATABASE_PORT"] %>
+
+development:
+  <<: *default
+  encoding: unicode
+  database: starterkit_development
+  host: localhost
+  username: <%= ENV["RAILS_DATABASE_USER"] %>
+  password: <%= ENV["RAILS_DATABASE_PASSWORD"] %>
+
+production:
+  <<: *default
+  encoding: unicode
+  database: chatty
+  host: localhost
+  username: <%= ENV["RAILS_DATABASE_USER"] %>
+  password: <%= ENV["RAILS_DATABASE_PASSWORD"] %>
+
+
+test:
+  <<: *default
+  encoding: unicode
+  database: starterkit_test
+  host: localhost
+  username: <%= ENV["RAILS_DATABASE_USER"] %>
+  password: <%= ENV["RAILS_DATABASE_PASSWORD"] %>
