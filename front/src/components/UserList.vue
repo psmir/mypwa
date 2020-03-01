@@ -1,7 +1,10 @@
 <template>
   <b-list-group>
     <b-list-group-item v-for="user in users" v-bind:key="user.id">
-      <span :class="user.online ? 'online' : 'offline'"></span> {{ user.email }}
+      <span :class="user.online ? 'online' : 'offline'"></span>
+      <router-link :to="{name: 'messenger', params: { user_id: user.id } }">
+        {{ user.email }}
+      </router-link>
     </b-list-group-item>
   </b-list-group>
 </template>

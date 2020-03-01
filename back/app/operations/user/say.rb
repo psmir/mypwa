@@ -5,13 +5,17 @@ class User::Say < BaseOperation
     string :body
   end
 
+  optional do
+    integer :addressee_id
+  end
+
   def authorized?
     actor.present?
   end
 
   def execute
-    record = actor.messages.create(body: body)
+    record = actor.messages.create(body: body, addressee_id: addressee_id)
 
-    { id: record.id, body: record.body }
+    { id: record.id, user_id: record.user_id, author: actor.email, body: record.body, addressee_id: record.addressee_id }
   end
 end

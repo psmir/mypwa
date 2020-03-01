@@ -57,7 +57,7 @@ export default {
         password: this.password
       }).then(payload => {
         console.log(payload)
-        this.$store.commit('login', { email: this.email })
+        this.$store.commit('login', { email: this.email, id: payload.id })
         this.$router.push({ path: '/' })
       })
       .catch(errors => {

@@ -33,13 +33,13 @@ class MainController < ApplicationController
   def after_user_sign_in(outcome)
     return unless outcome.success?
 
-    store_in_session(:user_id, outcome.result[:user_id])
+    store_in_session(:user_id, outcome.result[:id])
   end
 
   def after_user_sign_up(outcome)
     return unless outcome.success?
 
-    store_in_session(:user_id, outcome.result[:user_id])
+    store_in_session(:user_id, outcome.result[:id])
   end
 
   def after_user_sign_out(outcome)

@@ -7,7 +7,7 @@ const routes = [
   { path: '/', component: Home },
   { path: '/login', component: Login },
   { path: '/signup', component: SignUp },
-  { path: '/messenger', component: Messenger },
+  { path: '/messenger/:user_id?', component: Messenger, name: 'messenger', props: true },
 ];
 
 export default routes;

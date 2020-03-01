@@ -17,6 +17,6 @@ describe 'Login', type: :request do
 
   it 'returns the token' do
     expect(json['success']).to be_truthy
-    expect(json['payload']['user_id']).to be_present
+    expect(json['payload']['id']).to be_present
   end
 end

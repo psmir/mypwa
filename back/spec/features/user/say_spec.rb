@@ -13,9 +13,9 @@ describe 'User::Say', js: true do
 
   scenario 'Write a message' do
     click_link 'Messenger'
-    fill_in 'message_textarea', with: 'Hello!'
+    fill_in 'body', with: 'Hello!'
     click_button 'Send'
-    within '#messages_list' do
+    within '#message_list' do
       is_expected.to have_content 'Hello!'
     end
   end

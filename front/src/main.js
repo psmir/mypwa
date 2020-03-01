@@ -38,16 +38,19 @@ const router = new VueRouter({
 const store = new Vuex.Store({
   state: {
     currentUser: {
+      id: null,
       email: 'guest'
     }
   },
   mutations: {
     login (state, payload) {
       console.log(payload);
+      state.currentUser.id = payload.id
       state.currentUser.email = payload.email
     },
 
     logout (state) {
+      state.currentUser.id = null
       state.currentUser.email = 'guest'
     }
   }

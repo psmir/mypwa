@@ -13,7 +13,7 @@ class User::SignIn < BaseOperation
   def execute
     # debugger
     user = User.find_by(email: email)
-    return { user_id: user.id } if user.present? && user.authenticate(password)
+    return { id: user.id } if user.present? && user.authenticate(password)
 
     add_error(:base, :not_authenticated, 'Wrong email or password')
   end

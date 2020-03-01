@@ -20,6 +20,6 @@ class User::SignUp < BaseOperation
     user = User.new(email: email, password: password)
     add_error(:base, :something_wrong, 'Something went wrong') && return unless user.save
 
-    { user_id: user.id }
+    { id: user.id }
   end
 end

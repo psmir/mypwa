@@ -6,6 +6,7 @@ class User < ApplicationRecord
   enum role: %i[user admin]
 
   has_many :messages, inverse_of: :user
+  has_many :incoming_messages, class_name: 'Message', foreign_key: :addressee_id, inverse_of: :addressee
 
   def set_online!
     update(online: true)

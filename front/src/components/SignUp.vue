@@ -6,7 +6,7 @@
         <b-alert :show="errors.base != null" variant="danger">
           {{ errors.base }}
         </b-alert>
-        <b-form v-on:submit.prevent="performLogin">
+        <b-form v-on:submit.prevent="performSignUp">
           <b-form-group>
             <b-form-input v-model="email" id="email" type="email" :state="emailState" placeholder='Email'></b-form-input>
             <b-form-invalid-feedback id="email-feedback">
@@ -42,6 +42,15 @@ import serverOp from '../server_operation'
 export default {
   name: 'SignUp',
 
+  data: function() {
+    return {
+      email:                 null,
+      password:              null,
+      password_confirmation: null,
+      errors:                {}
+    }
+  },
+
   computed: {
     emailState() {
       return this.errors.email == null ? null : false
@@ -54,17 +63,8 @@ export default {
     }
   },
 
-  data: function() {
-    return {
-      email:                 null,
-      password:              null,
-      password_confirmation: null,
-      errors:                {}
-    }
-  },
-
   methods: {
-    performLogin: function(){
+    performSignUp: function(){
       serverOp.run('User::SignUp', {
         email:                 this.email,
         password:              this.password,
@@ -72,7 +72,7 @@ export default {
       })
       .then(payload => {
         console.log(payload)
-        this.$store.commit('login', { email: this.email })
+        this.$store.commit('login', { email: this.email, id: payload.id })
         this.$router.push({ path: '/' })
       })
       .catch(errors => {

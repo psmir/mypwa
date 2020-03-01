@@ -6,6 +6,6 @@ class User::FetchCurrent < BaseOperation
   end
 
   def execute
-    { user_id: actor.id, email: actor.email }
+    { id: actor.id, email: actor.email }
   end
 end
