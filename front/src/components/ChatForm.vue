@@ -17,10 +17,10 @@ export default {
   name: 'ChatForm',
   props: ['user_id'],
 
-  watch: {
-    user_id: function() { // watch it
-      this.body = null;
-      this.errors = {};
+  data: function() {
+    return {
+      body: null,
+      errors: {}
     }
   },
 
@@ -30,10 +30,10 @@ export default {
     },
   },
 
-  data: function() {
-    return {
-      body: null,
-      errors: {}
+  watch: {
+    user_id: function() {
+      this.body = null;
+      this.errors = {};
     }
   },
 

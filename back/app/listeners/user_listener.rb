@@ -2,13 +2,13 @@
 
 class UserListener < BaseListener
   def user_say_success(result, actor)
-    message = {
-      id: result[:id],
-      user_id: result[:user_id],
-      addressee_id: result[:addressee_id],
-      author: actor.email,
-      body: result[:body],
-    }
+    # message = {
+    #   id: result[:id],
+    #   user_id: result[:user_id],
+    #   addressee_id: result[:addressee_id],
+    #   author: actor.email,
+    #   body: result[:body],
+    # }
 
     channels = []
 
@@ -19,7 +19,7 @@ class UserListener < BaseListener
       channels << 'ChatChannel'
     end
 
-    channels.each { |channel| ActionCable.server.broadcast(channel, message: message) }
+    channels.each { |channel| ActionCable.server.broadcast(channel, message: result) }
   end
 
   def user_set_online_success(_result, _actor)
