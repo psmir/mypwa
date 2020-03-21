@@ -6,7 +6,7 @@ class User::SetOnline < BaseOperation
   end
 
   def authorized?
-    actor.id == user_id
+    actor.present? && actor.id == user_id
   end
 
   def execute
