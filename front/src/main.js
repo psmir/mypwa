@@ -40,18 +40,32 @@ const store = new Vuex.Store({
     currentUser: {
       id: null,
       email: 'guest'
-    }
+    },
+
+    messageCounter: {
+    },
   },
   mutations: {
-    login (state, payload) {
+    login(state, payload) {
       console.log(payload);
       state.currentUser.id = payload.id
       state.currentUser.email = payload.email
     },
 
-    logout (state) {
+    logout(state) {
       state.currentUser.id = null
       state.currentUser.email = 'guest'
+    },
+
+    messageReceived (state, room) {
+      if(state.messageCounter[room] == null){
+         Vue.set(state.messageCounter, room, 0);
+      }
+      state.messageCounter[room] = state.messageCounter[room] + 1;
+    },
+
+    resetMessageCounter(state, room) {
+      Vue.set(state.messageCounter, room, 0);
     }
   }
 })

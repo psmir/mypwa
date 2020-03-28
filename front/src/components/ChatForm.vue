@@ -15,7 +15,7 @@ import serverOp from '../server_operation'
 
 export default {
   name: 'ChatForm',
-  props: ['user_id'],
+  props: ['current_room'],
 
   data: function() {
     return {
@@ -31,7 +31,7 @@ export default {
   },
 
   watch: {
-    user_id: function() {
+    current_room: function() {
       this.body = null;
       this.errors = {};
     }
@@ -41,7 +41,7 @@ export default {
     sendMessage: function(){
       serverOp.run('User::Say', {
         body: this.body,
-        addressee_id: this.user_id
+        addressee_id: this.current_room
       })
       .then(() => {
         this.body = null

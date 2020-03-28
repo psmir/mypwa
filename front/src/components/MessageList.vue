@@ -10,15 +10,17 @@
 
 <script>
 import serverOp from '../server_operation'
+import { mapState } from 'vuex';
 
 export default {
   name: 'MessageList',
-  props: ['user_id'],
+  props: ['current_room'],
   watch: {
-    user_id: function(newVal, oldVal) { // watch it
+    current_room: function(newVal, oldVal) { // watch it
       console.log('Prop changed in MessageList: ', newVal, ' | was: ', oldVal);
       this.messages = [];
       this.page = 2;
+      this.$store.commit('resetMessageCounter', newVal || 'general');
       this.getLatestMessages();
       setTimeout(() => this.scrollToBottom(), 500);
     }
@@ -30,10 +32,16 @@ export default {
     }
   },
 
+  computed: {
+    ...mapState({
+      currentUser: state => state.currentUser
+    })
+  },
+
   methods: {
     getLatestMessages: function(){
       serverOp.run('Message::Latest', {
-        user_id: this.user_id
+        user_id: this.current_room
       })
       .then(payload => {
         this.messages = payload
@@ -68,9 +76,13 @@ export default {
       received(data) {
         console.log('Data received');
         console.log(data);
-        if(this.user_id == null) {
+        if(this.current_room == null) {
           this.messages.push(data.message);
           setTimeout(() => this.scrollToBottom(), 500);
+        }
+
+        if (this.currentUser.id != data.message.user_id && this.current_room != null) {
+          this.$store.commit('messageReceived', 'general');
         }
       }
     },
@@ -82,9 +94,13 @@ export default {
       received(data) {
         console.log('Data received to private channel');
         console.log(data);
-        if(this.user_id == data.message.user_id || this.user_id == data.message.addressee_id) {
+        if(this.current_room == data.message.user_id || this.current_room == data.message.addressee_id) {
           this.messages.push(data.message);
           setTimeout(() => this.scrollToBottom(), 500);
+        }
+        console.log(`Current user id: ${this.currentUser.id}. Message user_id: ${data.message.user_id}`);
+        if (this.currentUser.id != data.message.user_id && this.current_room != data.message.user_id) {
+          this.$store.commit('messageReceived', data.message.user_id);
         }
       }
 
@@ -92,7 +108,7 @@ export default {
   },
 
   mounted() {
-    console.log(`MessageList mounted. user_id: ${this.user_id}`);
+    console.log(`MessageList mounted. current_room: ${this.current_room}`);
 
     this.$cable.subscribe({ channel: 'ChatChannel' });
     this.$cable.subscribe({ channel: 'PrivateChatChannel' });

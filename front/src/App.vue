@@ -69,7 +69,7 @@ export default {
     console.log(process.env.VUE_APP_SERVER_URL)
     serverOp.run('User::FetchCurrent')
     .then(payload => {
-      this.$store.commit('login', { email: payload.email })
+      this.$store.commit('login', { email: payload.email, id: payload.id })
     })
     .catch(errors => {
       console.log('Cannot obtain current user:')
