@@ -2,14 +2,6 @@
 
 class UserListener < BaseListener
   def user_say_success(result, actor)
-    # message = {
-    #   id: result[:id],
-    #   user_id: result[:user_id],
-    #   addressee_id: result[:addressee_id],
-    #   author: actor.email,
-    #   body: result[:body],
-    # }
-
     channels = []
 
     if result[:addressee_id].present?

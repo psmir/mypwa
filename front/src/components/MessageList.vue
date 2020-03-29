@@ -1,11 +1,13 @@
 <template>
-  <ul id='message_list' ref='message_list'>
-    <li><infinite-loading direction="top" @infinite="infiniteHandler"></infinite-loading></li>
-    <li v-for="msg in messages" v-bind:key="msg.id">
-      {{ msg.author }} : {{ msg.body }}
-    </li>
-  </ul>
-
+  <div>
+    <ul id='message_list' ref='message_list'>
+      <li><infinite-loading direction="top" @infinite="infiniteHandler"></infinite-loading></li>
+      <li v-for="msg in messages" v-bind:key="msg.id">
+        {{ msg.author }} : {{ msg.body }}
+      </li>
+    </ul>
+    <audio ref='notification_player' :src="require('../assets/plucky.mp3')"></audio>
+  </div>
 </template>
 
 <script>
@@ -51,6 +53,12 @@ export default {
     scrollToBottom: function(){
       var container = this.$refs.message_list;
       container.scrollTop = container.scrollHeight;
+    },
+
+    playSound: function(){
+      var player = this.$refs.notification_player;
+      player.currentTime = 0;
+      player.play();
     },
 
     infiniteHandler($state) {
@@ -101,6 +109,7 @@ export default {
         console.log(`Current user id: ${this.currentUser.id}. Message user_id: ${data.message.user_id}`);
         if (this.currentUser.id != data.message.user_id && this.current_room != data.message.user_id) {
           this.$store.commit('messageReceived', data.message.user_id);
+          this.playSound();
         }
       }
 
