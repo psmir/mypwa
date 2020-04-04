@@ -3,7 +3,7 @@
     <b-row no-gutters>
       <b-col cols='12'>
         <b-navbar toggleable="lg" type="dark" variant="info">
-          <b-navbar-brand href="#">MyPWA</b-navbar-brand>
+          <b-navbar-brand href="#">MyPWA 1.0.2</b-navbar-brand>
 
           <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
