@@ -3,7 +3,7 @@
     <b-row no-gutters>
       <b-col cols='12'>
         <b-navbar toggleable="lg" type="dark" variant="info">
-          <b-navbar-brand href="#">MyPWA 1.0.3</b-navbar-brand>
+          <b-navbar-brand href="#">MyPWA 1.0.4</b-navbar-brand>
 
           <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -29,6 +29,9 @@
         <router-view></router-view>
       </b-col>
     </b-row>
+    <button v-if="updateExists" @click="refreshApp">
+      New version available! Click to update
+    </button>
   </b-container>
 </template>
 
@@ -43,6 +46,9 @@ export default {
 
   data: function() {
     return {
+      refreshing: false,
+      registration: null,
+      updateExists: false,
     }
   },
   computed: {
@@ -61,7 +67,31 @@ export default {
       .catch(errors => {
         console.log(errors);
       });
-    }
+    },
+
+    showRefreshUI (e) {
+      this.registration = e.detail;
+      this.updateExists = true;
+    },
+
+    refreshApp () {
+      this.updateExists = false;
+      if (!this.registration || !this.registration.waiting) { return; }
+      this.registration.waiting.postMessage('skipWaiting');
+    },
+  },
+
+  created() {
+    document.addEventListener(
+      'swUpdated', this.showRefreshUI, { once: true }
+    );
+    navigator.serviceWorker.addEventListener(
+      'controllerchange', () => {
+        if (this.refreshing) return;
+        this.refreshing = true;
+        window.location.reload();
+      }
+    );
   },
 
   mounted() {
