@@ -1,34 +1,43 @@
-# README
+# MyPWA backend
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Setup
 
-Things you may want to cover:
+Use ruby version `2.6.3`. Check `.ruby-version` file for actual supported version
 
-* Ruby version
+If you use RVM, you can run:
+```sh
+$ rvm use ruby-2.6.3@mypwa --create
+```
 
-* System dependencies
+Run bundle install:
+```sh
+$ bundle install
+```
 
-* Configuration
+Copy and edit config files from examples:
+```sh
+$ cp .env.development-sample .env.development
+$ cp .env.test-sample .env.test
+```
 
-* Database creation
+Create database:
 
-* Database initialization
+```sh
+$ bundle exec rake db:create db:schema:load
+```
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Testing
 
 
 End to end testing:
 
 In the directory with the client app please execute
+```sh
 $ npx vue-cli-service serve --mode test --port 8081
+```
 
 After that you can run feature specs:
 
+```sh
 $ bundle exec rspec spec/features
+```

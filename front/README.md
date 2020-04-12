@@ -1,38 +1,27 @@
 # MyPWA frontend
 
 ## Project setup
-```
-yarn install
+
+Expected Node version ">= 10.*"
+
+```sh
+$ yarn install
 ```
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
+## Start
+
+```sh
+$ npx vue-cli-service serve --mode development --port 8080
 ```
 
-### Compiles and minifies for production
-```
-yarn run build
-```
 
-### Run your tests
-```
-yarn run test
-```
+## Access from a device locally
 
-### Lints and fixes files
-```
-yarn run lint
-```
+In the frontend directory start rails server like this:
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-
-### Access from a device locally
-
-Start rails server like this:
-
+```sh
 $ rails s -b 0.0.0.0
+```
 
 Then edit .env.development (set your local ip there)
 
@@ -40,7 +29,10 @@ VUE_APP_SERVER_URL=http://192.168.1.65:3000
 VUE_APP_ACTIONCABLE_URL=ws://192.168.1.65:3000/cable
 
 Then run:
+
+```sh
 $ npx vue-cli-service serve --mode development --port 8080
+```
 
 And you can access the app with your device
 http://192.168.1.65:8080
