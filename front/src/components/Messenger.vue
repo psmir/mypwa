@@ -13,9 +13,20 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import Rooms from './Rooms'
 import MessageList from './MessageList'
 import ChatForm from './ChatForm'
+import ActionCableVue from 'actioncable-vue';
+
+const actioncableUrl = process.env.VUE_APP_ACTIONCABLE_URL;
+
+Vue.use(ActionCableVue, {
+  debug: true,
+  debugLevel: 'error',
+  connectionUrl: actioncableUrl,
+  connectImmediately: true
+});
 
 export default {
   name: 'Messenger',

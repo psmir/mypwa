@@ -1,13 +1,8 @@
-import Home from './components/Home'
-import Login from './components/Login'
-import SignUp from './components/SignUp'
-import Messenger from './components/Messenger'
-
 const routes = [
-  { path: '/', component: Home },
-  { path: '/login', component: Login },
-  { path: '/signup', component: SignUp },
-  { path: '/messenger/:current_room?', component: Messenger, name: 'messenger', props: true },
+  { path: '/', component: () => import('./components/Home') },
+  { path: '/login', component: () => import('./components/Login') },
+  { path: '/signup', component: () => import('./components/SignUp') },
+  { path: '/messenger/:current_room?', component: () => import('./components/Messenger'), name: 'messenger', props: true },
 ];
 
 export default routes;

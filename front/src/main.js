@@ -2,33 +2,32 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Vuex from 'vuex'
 import App from './App.vue'
-import ActionCableVue from 'actioncable-vue';
-import BootstrapVue from 'bootstrap-vue'
+import { LayoutPlugin, CardPlugin, AlertPlugin, CollapsePlugin, FormPlugin, FormGroupPlugin, NavbarPlugin, NavPlugin, JumbotronPlugin, ListGroupPlugin,
+  ButtonPlugin, FormTextareaPlugin, FormInputPlugin, BadgePlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-import InfiniteLoading from 'vue-infinite-loading';
 
 import routes from './routes'
 import './registerServiceWorker'
 
-const actioncableUrl = process.env.VUE_APP_ACTIONCABLE_URL;
-
 Vue.config.productionTip = false
 Vue.use(VueRouter)
 Vue.use(Vuex)
-Vue.use(ActionCableVue, {
-  debug: true,
-  debugLevel: 'error',
-  connectionUrl: actioncableUrl,
-  connectImmediately: true
-});
 
-Vue.use(BootstrapVue);
-Vue.use(InfiniteLoading, {
-  system: {
-    throttleLimit: 1000
-  },
-});
+Vue.use(LayoutPlugin);
+Vue.use(CardPlugin);
+Vue.use(AlertPlugin);
+Vue.use(CollapsePlugin);
+Vue.use(FormPlugin);
+Vue.use(FormGroupPlugin);
+Vue.use(NavbarPlugin);
+Vue.use(NavPlugin);
+Vue.use(JumbotronPlugin);
+Vue.use(ListGroupPlugin);
+Vue.use(ButtonPlugin);
+Vue.use(FormTextareaPlugin);
+Vue.use(FormInputPlugin);
+Vue.use(BadgePlugin);
 
 const router = new VueRouter({
   mode: 'history',

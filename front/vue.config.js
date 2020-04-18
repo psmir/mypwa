@@ -6,4 +6,12 @@ module.exports = {
       swDest: 'service-worker.js',
     },
   },
+
+  configureWebpack: {
+    optimization: {
+      splitChunks: {
+        chunks: 'all'
+      }
+    }
+  }
 };

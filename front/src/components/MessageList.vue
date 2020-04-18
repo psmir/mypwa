@@ -11,8 +11,16 @@
 </template>
 
 <script>
+import Vue from 'vue';
+import InfiniteLoading from 'vue-infinite-loading';
 import serverOp from '../server_operation'
 import { mapState } from 'vuex';
+
+Vue.use(InfiniteLoading, {
+  system: {
+    throttleLimit: 1000
+  },
+});
 
 export default {
   name: 'MessageList',
